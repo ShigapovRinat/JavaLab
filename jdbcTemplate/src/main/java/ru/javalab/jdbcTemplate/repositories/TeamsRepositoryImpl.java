@@ -1,28 +1,19 @@
-package repositories;
+package ru.javalab.jdbcTemplate.repositories;
 
-import models.Player;
-import models.Team;
+import ru.javalab.jdbcTemplate.models.Player;
+import ru.javalab.jdbcTemplate.models.Team;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
 public class TeamsRepositoryImpl implements TeamsRepository {
 
     //language=SQL
-    private static final String SQL_SELECT_BY_ID = "select * from team where id = ?";
-    //language=SQL
-    private static final String SQL_SELECT_ALL = "select * from team";
-    //language=SQL
     private static final String SQL_INSERT = "insert into team(name, hometown) values (?, ?)";
-    //language=SQL
-    private static final String SQL_SELECT_PLAYER_BY_ID_TEAM = "select * from player where team = ?";
     //language=SQL
     private static final String SQL_DELETE = "delete from team where id = ?";
     //language=SQL
@@ -83,7 +74,7 @@ public class TeamsRepositoryImpl implements TeamsRepository {
                         .name((String) map.get("player_name"))
                         .surname((String) map.get("surname"))
                         .number((Integer) map.get("number"))
-                        .teamId(team.getId())
+                        .team(team)
                         .build();
                 players.add(player);
             }
@@ -122,7 +113,7 @@ public class TeamsRepositoryImpl implements TeamsRepository {
                     .name((String) map.get("player_name"))
                     .surname((String) map.get("surname"))
                     .number((Integer) map.get("number"))
-                    .teamId(newTeam.getId())
+                    .team(newTeam)
                     .build();
             players.add(player);
 
@@ -138,7 +129,12 @@ public class TeamsRepositoryImpl implements TeamsRepository {
     }
 
 
-
+//    //language=SQL
+//    private static final String SQL_SELECT_BY_ID = "select * from team where id = ?";
+//    //language=SQL
+//    private static final String SQL_SELECT_ALL = "select * from team";
+//    //language=SQL
+//    private static final String SQL_SELECT_PLAYER_BY_ID_TEAM = "select * from player where team = ?";
 //        private RowMapper<Team> teamRowMapper = (row, rowNumber) ->
 //            Team.builder()
 //                    .id(row.getLong("id"))

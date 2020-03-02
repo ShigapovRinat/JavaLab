@@ -1,4 +1,4 @@
-package models;
+package ru.javalab.jdbcTemplate.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,5 +14,5 @@ public class Player {
     private String name;
     private String surname;
     private Integer number;
-    private Long teamId;
+    private Team team;
 }

@@ -1,4 +1,4 @@
-package models;
+package ru.javalab.jdbcTemplate.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

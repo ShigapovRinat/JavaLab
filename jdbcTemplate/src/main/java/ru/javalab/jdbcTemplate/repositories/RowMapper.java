@@ -1,4 +1,4 @@
-package repositories;
+package ru.javalab.jdbcTemplate.repositories;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -1,11 +1,12 @@
-package repositories;
+package ru.javalab.jdbcTemplate.repositories;
 
-import models.Player;
+import ru.javalab.jdbcTemplate.models.Player;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import ru.javalab.jdbcTemplate.models.Team;
 
 import java.sql.PreparedStatement;
 import java.util.List;
@@ -14,7 +15,9 @@ import java.util.Optional;
 public class PlayersRepositoryImpl implements PlayersRepository {
 
     //language=SQL
-    private static final String SQL_SELECT_BY_ID = "select * from player where id = ?";
+    private static final String SQL_SELECT_BY_ID = "select player.id, player.name, player.surname, player.number, player.team," +
+            "       t.name as team_name, t.hometown from player" +
+            "       left join team t on player.team = t.id where player.id = 5;";
     //language=SQL
     private static final String SQL_SELECT_ALL = "select * from player";
     //language=SQL
@@ -35,7 +38,11 @@ public class PlayersRepositoryImpl implements PlayersRepository {
                     .name(row.getString("name"))
                     .surname(row.getString("surname"))
                     .number(row.getInt("number"))
-                    .teamId(row.getLong("team"))
+                    .team(Team.builder()
+                            .id(row.getLong("team"))
+                            .name(row.getString("team_name"))
+                            .hometown(row.getString("hometown"))
+                            .build())
                     .build();
 
     @Override
@@ -63,7 +70,7 @@ public class PlayersRepositoryImpl implements PlayersRepository {
             statement.setString(1, player.getName());
             statement.setString(2, player.getSurname());
             statement.setInt(3, player.getNumber());
-            statement.setLong(4, player.getTeamId());
+            statement.setLong(4, player.getTeam().getId());
             return statement;
         }, keyHolder);
         player.setId((Long)keyHolder.getKey());

@@ -1,15 +1,16 @@
+package ru.javalab.jdbcTemplate;
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import models.Player;
-import models.Team;
+import ru.javalab.jdbcTemplate.models.Player;
+import ru.javalab.jdbcTemplate.models.Team;
 import org.springframework.jdbc.core.JdbcTemplate;
-import repositories.PlayersRepository;
-import repositories.PlayersRepositoryImpl;
-import repositories.TeamsRepository;
-import repositories.TeamsRepositoryImpl;
+import ru.javalab.jdbcTemplate.repositories.PlayersRepository;
+import ru.javalab.jdbcTemplate.repositories.PlayersRepositoryImpl;
+import ru.javalab.jdbcTemplate.repositories.TeamsRepository;
+import ru.javalab.jdbcTemplate.repositories.TeamsRepositoryImpl;
 
 import java.io.FileInputStream;
-import java.sql.DriverManager;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
@@ -58,13 +59,13 @@ public class App {
                 .name("Rinat")
                 .surname("Shigapov")
                 .number(10)
-                .teamId(3L)
+                .team(team)
                 .build();
         Player player2 = Player.builder()
                 .name("Ivan")
                 .surname("Ivanov")
                 .number(4)
-                .teamId(3L)
+                .team(team)
                 .build();
 
         playersRepository.save(player2);
