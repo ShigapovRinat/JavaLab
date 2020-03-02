@@ -16,17 +16,10 @@ import java.util.Optional;
 import java.util.Properties;
 
 public class App {
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/javalab_jdbcTemplate";
-    private static final String DB_USER = "postgres";
-    private static final String DB_PASSWORD = "postgres";
 
     public static void main(String[] args) throws Exception {
         Class.forName("org.postgresql.Driver");
 
-//        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-//        dataSource.setUsername(DB_USER);
-//        dataSource.setPassword(DB_PASSWORD);
-//        dataSource.setUrl(DB_URL);
 
 
         Properties property = new Properties();
@@ -81,6 +74,9 @@ public class App {
         for (Team t: teams) {
             System.out.println(t.toString());
         }
+
+        System.out.println(teamsRepository.find(3L).toString());
+        System.out.println(teamsRepository.find(100L).toString());
 
     }
 

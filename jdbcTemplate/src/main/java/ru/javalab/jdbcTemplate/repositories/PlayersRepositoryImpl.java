@@ -17,9 +17,11 @@ public class PlayersRepositoryImpl implements PlayersRepository {
     //language=SQL
     private static final String SQL_SELECT_BY_ID = "select player.id, player.name, player.surname, player.number, player.team," +
             "       t.name as team_name, t.hometown from player" +
-            "       left join team t on player.team = t.id where player.id = 5;";
+            "       left join team t on player.team = t.id where player.id = ?;";
     //language=SQL
-    private static final String SQL_SELECT_ALL = "select * from player";
+    private static final String SQL_SELECT_ALL = "select player.id, player.name, player.surname, player.number, player.team," +
+            "       t.name as team_name, t.hometown from player" +
+            "       left join team t on player.team = t.id";
     //language=SQL
     private static final String SQL_INSERT = "insert into player(name, surname, number, team) values (?, ?, ?, ?)";
     //language=SQL
@@ -66,7 +68,7 @@ public class PlayersRepositoryImpl implements PlayersRepository {
 
         jdbcTemplate.update(connection -> {
             PreparedStatement statement = connection
-                    .prepareStatement(SQL_INSERT);
+                    .prepareStatement(SQL_INSERT, new String[]{"id"});
             statement.setString(1, player.getName());
             statement.setString(2, player.getSurname());
             statement.setInt(3, player.getNumber());

@@ -1,18 +1,21 @@
 package ru.javalab.jdbcTemplate.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Player {
+    @Getter
+    @Setter
     private Long id;
+    @Getter
     private String name;
+    @Getter
     private String surname;
+    @Getter
     private Integer number;
+    @Getter
     private Team team;
 }

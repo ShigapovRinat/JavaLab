@@ -37,7 +37,7 @@ public class TeamsRepositoryImpl implements TeamsRepository {
 
         jdbcTemplate.update(connection -> {
             PreparedStatement statement = connection
-                    .prepareStatement(SQL_INSERT);
+                    .prepareStatement(SQL_INSERT, new String[]{"id"});
             statement.setString(1, team.getName());
             statement.setString(2, team.getHometown());
             return statement;
@@ -81,7 +81,7 @@ public class TeamsRepositoryImpl implements TeamsRepository {
             team.setPlayers(players);
 
             return Optional.ofNullable(team);
-        } catch (EmptyResultDataAccessException| IndexOutOfBoundsException e) {
+        } catch (EmptyResultDataAccessException | IndexOutOfBoundsException e) {
             return Optional.empty();
         }
     }
