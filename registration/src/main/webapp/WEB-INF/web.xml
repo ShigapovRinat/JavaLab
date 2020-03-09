@@ -12,4 +12,5 @@
     <listener>
         <listener-class>ru.javalab.registration.listeners.SpringContextServletContextListener</listener-class>
     </listener>
+
 </web-app>

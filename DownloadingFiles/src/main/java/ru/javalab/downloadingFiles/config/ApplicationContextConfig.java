@@ -1,25 +1,30 @@
-package ru.javalab.registration.config;
+package ru.javalab.downloadingFiles.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import javax.sql.DataSource;
 import java.util.Objects;
 import java.util.Properties;
 
-@Configuration
-@ComponentScan(basePackages = "ru.javalab.registration")
+@Component
 @PropertySource("classpath:application.properties")
+@EnableAspectJAutoProxy
+@ComponentScan(basePackages = "ru.javalab.downloadingFiles")
 public class ApplicationContextConfig {
 
     @Autowired
@@ -51,6 +56,24 @@ public class ApplicationContextConfig {
         return config;
     }
 
+
+    @Bean
+    public FreeMarkerViewResolver freemarkerViewResolver() {
+        FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
+        resolver.setPrefix("");
+        resolver.setSuffix(".ftl");
+        resolver.setContentType("text/html; charset=UTF-8");
+        return resolver;
+    }
+
+    @Bean
+    public FreeMarkerConfigurer freemarkerConfig() {
+        FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
+        freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/views/ftl/");
+
+        return freeMarkerConfigurer;
+    }
+
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
@@ -67,6 +90,11 @@ public class ApplicationContextConfig {
         props.put("mail.debug", "true");
 
         return mailSender;
+    }
+
+    @Bean
+    public CommonsMultipartResolver multipartResolver(){
+        return new CommonsMultipartResolver();
     }
 
     @Bean

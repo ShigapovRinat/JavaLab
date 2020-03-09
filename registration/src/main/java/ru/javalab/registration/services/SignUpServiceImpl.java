@@ -1,6 +1,7 @@
 package ru.javalab.registration.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import ru.javalab.registration.dto.SignUpDto;
 import ru.javalab.registration.models.User;
@@ -15,6 +16,7 @@ public class SignUpServiceImpl implements SignUpService {
     private UsersRepository usersRepository;
 
     @Autowired
+    @Qualifier(value = "emailServiceImplWithPicture")
     private EmailService emailService;
 
     @Override

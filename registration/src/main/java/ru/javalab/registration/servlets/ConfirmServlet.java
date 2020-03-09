@@ -1,9 +1,7 @@
 package ru.javalab.registration.servlets;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import ru.javalab.registration.services.ConfirmService;
-import ru.javalab.registration.services.ConfirmServiceImpl;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -17,7 +15,6 @@ import java.io.IOException;
 @WebServlet({"/confirm/*"})
 public class ConfirmServlet extends HttpServlet {
 
-    @Autowired
     private ConfirmService confirmService;
 
     @Override
@@ -30,6 +27,7 @@ public class ConfirmServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         confirmService.isConfirmed(req.getPathInfo().substring(1));
+        resp.sendRedirect("/signUp");
     }
 
 

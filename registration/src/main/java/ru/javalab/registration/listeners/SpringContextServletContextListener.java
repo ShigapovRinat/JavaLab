@@ -1,7 +1,9 @@
 package ru.javalab.registration.listeners;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.javalab.registration.config.ApplicationContextConfig;
 
 
 import javax.servlet.ServletContext;
@@ -13,7 +15,7 @@ import javax.servlet.annotation.WebListener;
 public class SpringContextServletContextListener implements ServletContextListener {
 
     public void contextInitialized(ServletContextEvent servletContextEvent) {
-        ApplicationContext springContext = new ClassPathXmlApplicationContext("context.xml");
+        ApplicationContext springContext = new AnnotationConfigApplicationContext(ApplicationContextConfig.class);
         ServletContext servletContext = servletContextEvent.getServletContext();
         servletContext.setAttribute("springContext", springContext);
     }

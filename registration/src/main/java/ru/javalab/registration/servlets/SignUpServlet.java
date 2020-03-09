@@ -1,9 +1,7 @@
 package ru.javalab.registration.servlets;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import ru.javalab.registration.dto.SignUpDto;
-import ru.javalab.registration.models.User;
 import ru.javalab.registration.services.SignUpService;
 
 import javax.servlet.ServletConfig;
@@ -18,7 +16,6 @@ import java.io.IOException;
 @WebServlet("/signUp")
 public class SignUpServlet extends HttpServlet {
 
-    @Autowired
     private SignUpService signUpService;
 
     @Override
