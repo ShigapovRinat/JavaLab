@@ -30,6 +30,7 @@ public class FilesController {
 
     @RequestMapping(value = "/files", method = RequestMethod.POST)
     public ModelAndView uploadFileView(@RequestParam("file") MultipartFile multipartFile, @RequestParam("email") String email) {
+        System.out.println(email);
         FileInfo fileInfo = FileInfo.builder()
                 .originalFileName(multipartFile.getOriginalFilename())
                 .size(multipartFile.getSize())

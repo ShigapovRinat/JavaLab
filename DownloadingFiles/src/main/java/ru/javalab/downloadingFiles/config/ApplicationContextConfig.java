@@ -4,7 +4,6 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -24,7 +23,6 @@ import java.util.Properties;
 @Component
 @PropertySource("classpath:application.properties")
 @EnableAspectJAutoProxy
-@ComponentScan(basePackages = "ru.javalab.downloadingFiles")
 public class ApplicationContextConfig {
 
     @Autowired
@@ -78,7 +76,7 @@ public class ApplicationContextConfig {
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost(environment.getProperty("mail.host"));
-        mailSender.setPort(Integer.parseInt(environment.getProperty("mail.port")));
+        mailSender.setPort(Integer.parseInt(Objects.requireNonNull(environment.getProperty("mail.port"))));
 
         mailSender.setUsername(environment.getProperty("mail.username"));
         mailSender.setPassword(environment.getProperty("mail.password"));
