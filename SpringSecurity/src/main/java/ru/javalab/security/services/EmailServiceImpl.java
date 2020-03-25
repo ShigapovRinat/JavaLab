@@ -1,4 +1,4 @@
-package ru.javalab.downloadingFiles.services;
+package ru.javalab.security.services;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -8,12 +8,13 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
-import ru.javalab.downloadingFiles.models.Mail;
+import ru.javalab.security.models.Mail;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+
 @Component
 public class EmailServiceImpl implements EmailService {
 
@@ -31,7 +32,7 @@ public class EmailServiceImpl implements EmailService {
                     MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                     StandardCharsets.UTF_8.name());
 
-            Template t = freeMarkerConfig.getConfiguration().getTemplate("email_notification.ftl");
+            Template t = freeMarkerConfig.getConfiguration().getTemplate("confirm_email.ftl");
             String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, mail.getModel());
 
             helper.setTo(mail.getTo());
