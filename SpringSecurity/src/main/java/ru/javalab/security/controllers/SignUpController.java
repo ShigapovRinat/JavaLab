@@ -28,7 +28,7 @@ public class SignUpController {
     public ModelAndView registration(SignUpDto dto) {
         try {
             service.signUp(dto);
-            return new ModelAndView("sign_in");
+            return new ModelAndView("redirect:/signIn");
         }catch (IllegalArgumentException e){
             return new ModelAndView("sign_up").addObject("exception", e);
         }
