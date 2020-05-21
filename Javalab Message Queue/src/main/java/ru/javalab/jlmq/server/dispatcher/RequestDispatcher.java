@@ -13,6 +13,7 @@ import ru.javalab.jlmq.server.protocol.payload.Accepted;
 import ru.javalab.jlmq.server.protocol.payload.Create;
 import ru.javalab.jlmq.server.protocol.payload.Receive;
 import ru.javalab.jlmq.server.protocol.payload.Subscribe;
+import ru.javalab.jlmq.server.service.MessageService;
 
 import java.io.IOException;
 import java.util.*;
@@ -22,7 +23,10 @@ import java.util.*;
 public class RequestDispatcher {
 
     @Autowired
-    ObjectMapper objectMapper;
+    private ObjectMapper objectMapper;
+
+    @Autowired
+    private MessageService messageService;
 
     private static List<JavaLabMessageQueue> notSubscribed = new ArrayList<>();
     private static Map<WebSocketSession, JavaLabMessageQueue> subscribed = new HashMap<>();
@@ -69,6 +73,7 @@ public class RequestDispatcher {
                             .content(receive.getContent())
                             .messageId(UUID.randomUUID().toString())
                             .build();
+                    messageService.save(toAdd);
 
                     if (subscribed.get(session) != null && subscribed.get(session).getName().equals(receive.getQueueName())) {
                         subscribed.get(session).getDeque().addLast(toAdd);

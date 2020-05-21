@@ -30,7 +30,7 @@ public class StompConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         RequestUpgradeStrategy upgradeStrategy = new TomcatRequestUpgradeStrategy();
-        registry.addEndpoint("/ru/javalab/messagequeue/stomp/protocol/messages").setAllowedOrigins("*").setHandshakeHandler(new DefaultHandshakeHandler(upgradeStrategy)).withSockJS();
+        registry.addEndpoint("/messages").setAllowedOrigins("*").setHandshakeHandler(new DefaultHandshakeHandler(upgradeStrategy)).withSockJS();
     }
 
     @Override

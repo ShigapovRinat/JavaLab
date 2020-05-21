@@ -14,7 +14,7 @@ public class HandShakeInterceptor implements ChannelInterceptor {
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
         StompHeaderAccessor accessor =
                 MessageHeaderAccessor.getAccessor(message, StompHeaderAccessor.class);
-        System.out.println(accessor.getCommand() + " to " + accessor.getDestination() + "\n");
+        System.out.println(accessor.getCommand() + " to " + accessor.getDestination());
         return message;
     }
 }

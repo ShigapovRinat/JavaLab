@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerStompSessionHandler extends StompSessionHandlerAdapter {
 
-    StompSession session;
+    private StompSession session;
 
     @Autowired
     ObjectMapper objectMapper;
