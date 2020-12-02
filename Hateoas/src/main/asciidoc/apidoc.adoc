@@ -1,0 +1,23 @@
+= Описание API по курсам
+
+== Методы
+
+|===
+|Метод | Назначение
+|`PUT`
+|Обновить сущность или ее состояние
+|===
+
+=== Создание заказа
+
+.request
+
+include::{snippets}\order\http-request.adoc[]
+
+.response
+
+include::{snippets}\order\http-response.adoc[]
+
+.response-fields
+
+include::{snippets}\order\response-fields.adoc[]
