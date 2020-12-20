@@ -1,4 +1,4 @@
-package ru.javalab.mongodb.jpa;
+package ru.javalab.mongodb_hateoas.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -20,6 +20,7 @@ public class Good {
     private String title;
     private Integer price;
     private String producer;
+
 
     @DBRef
     private Cpu cpu;
