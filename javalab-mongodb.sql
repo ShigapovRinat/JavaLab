@@ -1,3 +1,4 @@
+-- Пример с пары
 db.courses.insert(
     {
         title: "DB",
@@ -35,3 +36,39 @@ db.courses.update({_id: ObjectId("5fb1888bd58c784ea2d28710")}, {
         teacher: ObjectId("5fb18c89d58c784ea2d28719")
     }
 });
+                                 
+--   Своя бд
+ use shop
+ db.good.insert(
+    {
+        title: "phone",
+        producer: "xiaomi",
+        price: 1000
+    }
+    );
+
+db.good.insert(
+    {
+        title: "phone",
+        producer: "apple",
+        price: 4000
+    }
+    );
+
+db.good.insert(
+    {
+        title: "phone",
+        producer: "samsung",
+        price: 3500
+    }
+    );
+
+db.good.insert(
+    {
+        title: "laptop",
+        producer: "samsung",
+        price: 5500
+    }
+    );
+
+db.good.findAll();
